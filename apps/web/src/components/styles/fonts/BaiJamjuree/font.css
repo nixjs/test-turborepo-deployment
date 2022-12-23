@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'BaiJamjuree';
+    src: url('BaiJamjuree-BoldItalic.eot');
+    src: url('BaiJamjuree-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('BaiJamjuree-BoldItalic.svg#BaiJamjuree-BoldItalic') format('svg'), url('BaiJamjuree-BoldItalic.ttf') format('truetype'),
+        url('BaiJamjuree-BoldItalic.woff') format('woff'), url('BaiJamjuree-BoldItalic.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'BaiJamjuree';
+    src: url('BaiJamjuree-Bold.eot');
+    src: url('BaiJamjuree-Bold.eot?#iefix') format('embedded-opentype'), url('BaiJamjuree-Bold.svg#BaiJamjuree-Bold') format('svg'),
+        url('BaiJamjuree-Bold.ttf') format('truetype'), url('BaiJamjuree-Bold.woff') format('woff'),
+        url('BaiJamjuree-Bold.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}

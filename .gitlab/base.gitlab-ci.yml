@@ -1,0 +1,218 @@
+stages:
+    - build
+    - release
+    - deploy
+
+variables:
+    NPM_TOKEN: $CI_JOB_TOKEN
+    PNPM_STORE_CACHE: .pnpm-store
+    FF_USE_FASTZIP: 'true'
+    TRANSFER_METER_FREQUENCY: '2s'
+    ARTIFACT_COMPRESSION_LEVEL: 'fastest'
+    CACHE_COMPRESSION_LEVEL: 'fastest'
+
+install-deps:
+    image: $GCP_REGISTRY_HOST/node:v16.17.1-a
+    stage: .pre
+    before_script:
+        - pnpm config set store-dir .pnpm-store
+    script:
+        - pnpm i
+    cache:
+        - key: ${DEPLOY_ENVIRONMENT}-pnpm-store-cache
+          policy: push
+          paths:
+              - $PNPM_STORE_CACHE
+    rules:
+        - if: $CI_COMMIT_BRANCH =~ /^dev/
+          changes:
+              - package.json
+        - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^dev/
+          changes:
+              - package.json
+    tags:
+        - $DEPLOY_ENVIRONMENT
+
+# build-packages:
+#     image: $GCP_REGISTRY_HOST/node:v16.17.1-a
+#     stage: build
+#     script:
+#         - echo "  ⚙️  Build public packages"
+#         - yarn build
+#     cache:
+#         - key: ${DEPLOY_ENVIRONMENT}-module-cache
+#           policy: pull
+#           paths:
+#               - $NPM_ROOT_CACHE
+#     artifacts:
+#         paths:
+#             - 'packages/facebook-login/lib'
+#             - 'packages/telegram-login/lib'
+#             - 'packages/types/lib'
+#             - 'packages/uikit/lib'
+#             - 'packages/utils/lib'
+#     rules:
+#         - if: $CI_COMMIT_BRANCH =~ /^dev/
+#           changes:
+#               - packages/facebook-login/**/*
+#         - if: $CI_COMMIT_BRANCH =~ /^dev/
+#           changes:
+#               - packages/telegram-login/**/*
+#         - if: $CI_COMMIT_BRANCH =~ /^dev/
+#           changes:
+#               - packages/types/**/*
+#         - if: $CI_COMMIT_BRANCH =~ /^dev/
+#           changes:
+#               - packages/uikit/**/*
+#         - if: $CI_COMMIT_BRANCH =~ /^dev/
+#           changes:
+#               - packages/utils/**/*
+#     when: manual
+#     tags:
+#         - $DEPLOY_ENVIRONMENT
+
+# publish-packages:
+#     image: $GCP_REGISTRY_HOST/node:v16.17.1-a
+#     stage: release
+#     before_script:
+#         - |
+#             git config --global user.email inspirelab-dev@inspirelab.io
+#             git config --global user.name ilt-dev-bot
+#     script:
+#         - echo "  ⚙️  Setup repository"
+#         - git remote set-url origin "https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" && git checkout ${CI_COMMIT_REF_NAME}
+#         - echo "  🚀 Bump new version"
+#         - yarn new-version patch -y --no-private
+#         - |
+#             echo "  ⚙️  Publish packages"
+#             for pkg in $(ls packages)
+#             do
+#               if [[ $pkg == "website" ]]
+#                 continue
+#               fi
+#               package=@$pkg
+#               echo "    🚀 Publish $package"
+#               yarn workspace $package publish
+#               echo ""
+#             done
+#     needs:
+#         - build-packages
+#     cache:
+#         - key: ${DEPLOY_ENVIRONMENT}-module-cache
+#           policy: pull
+#           paths:
+#               - $NPM_ROOT_CACHE
+#     artifacts:
+#         paths:
+#             - 'packages/facebook-login/lib'
+#             - 'packages/telegram-login/lib'
+#             - 'packages/types/lib'
+#             - 'packages/uikit/lib'
+#             - 'packages/utils/lib'
+#     rules:
+#         - if: $CI_COMMIT_BRANCH =~ /^dev/
+#           changes:
+#               - packages/facebook-login/**/*
+#         - if: $CI_COMMIT_BRANCH =~ /^dev/
+#           changes:
+#               - packages/telegram-login/**/*
+#         - if: $CI_COMMIT_BRANCH =~ /^dev/
+#           changes:
+#               - packages/types/**/*
+#         - if: $CI_COMMIT_BRANCH =~ /^dev/
+#           changes:
+#               - packages/uikit/**/*
+#         - if: $CI_COMMIT_BRANCH =~ /^dev/
+#           changes:
+#               - packages/utils/**/*
+#     tags:
+#         - $DEPLOY_ENVIRONMENT
+
+.build-service:
+    image: $GCP_REGISTRY_HOST/node:v16.17.1-a
+    stage: build
+    variables:
+        NPM_ROOT: node_modules
+        NEXT_BUILD: apps/$PACKAGE_SERVICE/.next
+        NEXT_BUILD_CACHE: $NEXT_BUILD/cache
+        NPM_PACKAGE_SERVICE: apps/$PACKAGE_SERVICE/node_modules
+    before_script:
+        - pnpm config set store-dir .pnpm-store
+    script:
+        - pnpm i
+        - pnpm build-$DEPLOY_ENVIRONMENT
+        # - pnpm build
+        # - pnpm --filter @lottery/$PACKAGE_SERVICE build-$DEPLOY_ENVIRONMENT
+    cache:
+        - key: ${DEPLOY_ENVIRONMENT}-pnpm-store-cache
+          policy: pull
+          paths:
+              - $PNPM_STORE_CACHE
+        - key: ${DEPLOY_ENVIRONMENT}-${PACKAGE_SERVICE}-build-cache
+          policy: pull-push
+          paths:
+              - $NEXT_BUILD_CACHE
+        - key: ${DEPLOY_ENVIRONMENT}-${PACKAGE_SERVICE}-node-module-cache
+          policy: push
+          paths:
+              - $NPM_ROOT
+    tags:
+        - $DEPLOY_ENVIRONMENT
+    artifacts:
+        paths:
+            - $NEXT_BUILD
+            - $NPM_PACKAGE_SERVICE
+
+.publish-cdn:
+    image: gcr.io/google.com/cloudsdktool/cloud-sdk:alpine
+    stage: release
+    script:
+        - gcloud auth activate-service-account --key-file $GSA_STORAGE_ADMIN
+        - |
+            if [ -f "$PACKAGE_SERVICE_DIR/.next/static/public" ]; then
+              find public $PACKAGE_SERVICE_DIR/.next/static -type f -exec gzip -9v '{}' \; -exec mv "{}.gz" "{}" \;
+            fi
+        - gsutil -m -h Content-Encoding:gzip rsync -r $PACKAGE_SERVICE_DIR/.next/static $GSUTIL_URI/_next/static
+        - gsutil -m -h Content-Encoding:gzip rsync -r $PACKAGE_SERVICE_DIR/public $GSUTIL_URI
+    needs: []
+    tags:
+        - $DEPLOY_ENVIRONMENT
+
+.package-image:
+    stage: release
+    variables:
+        CI_REGISTRY_IMAGE: $GCP_REGISTRY_HOST/$CI_PROJECT_NAME
+        GIT_DEPTH: 1
+    image:
+        name: gcr.io/kaniko-project/executor:debug
+        entrypoint: ['']
+    script:
+        - |
+            echo "🏃 Running on branch '$CI_COMMIT_BRANCH': COMMIT_SHORT_SHA = $CI_COMMIT_SHORT_SHA"
+            /kaniko/executor --dockerfile $PACKAGE_SERVICE_DIR/Dockerfile \
+                             --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA \
+                             --context dir://$CI_PROJECT_DIR
+    cache:
+        - key: ${DEPLOY_ENVIRONMENT}-${PACKAGE_SERVICE}-node-module-cache
+          policy: pull
+          paths:
+              - $NPM_ROOT
+
+    tags:
+        - $DEPLOY_ENVIRONMENT
+    needs: []
+
+.deploy:
+    image: google/cloud-sdk:alpine
+    variables:
+        CI_REGISTRY_IMAGE: $GCP_REGISTRY_HOST/$CI_PROJECT_NAME
+    stage: deploy
+    script:
+        - gcloud auth activate-service-account --key-file $GCP_SA
+        - |
+            gcloud run deploy $CLOUD_RUN_SERVICE_NAME --image $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA \
+              --region=asia-southeast1 \
+              --platform managed \
+              --allow-unauthenticated
+    tags:
+        - $DEPLOY_ENVIRONMENT

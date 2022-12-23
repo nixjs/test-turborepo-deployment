@@ -1,0 +1,233 @@
+@font-face {
+  font-family: 'Lottery';
+  src:  url('fonts/Lottery.eot?1yjttu');
+  src:  url('fonts/Lottery.eot?1yjttu#iefix') format('embedded-opentype'),
+    url('fonts/Lottery.ttf?1yjttu') format('truetype'),
+    url('fonts/Lottery.woff?1yjttu') format('woff'),
+    url('fonts/Lottery.svg?1yjttu#Lottery') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'Lottery' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.iconic_deposit1:before {
+  content: "\e90c";
+}
+.iconic_withdrawal:before {
+  content: "\e90d";
+}
+.iconic_languages .path1:before {
+  content: "\e905";
+  color: rgb(78, 78, 78);
+}
+.iconic_languages .path2:before {
+  content: "\e907";
+  margin-left: -1em;
+  color: rgb(78, 78, 78);
+}
+.iconic_languages .path3:before {
+  content: "\e908";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.iconic_languages .path4:before {
+  content: "\e909";
+  margin-left: -1em;
+  color: rgb(78, 78, 78);
+}
+.iconic_languages .path5:before {
+  content: "\e90a";
+  margin-left: -1em;
+  color: rgb(78, 78, 78);
+}
+.iconic_languages .path6:before {
+  content: "\e90b";
+  margin-left: -1em;
+  color: rgb(78, 78, 78);
+}
+.iconic_term:before {
+  content: "\e903";
+}
+.iconic_news:before {
+  content: "\e902";
+}
+.iconic_arrow_down_small:before {
+  content: "\e901";
+}
+.iconic_logout:before {
+  content: "\e900";
+}
+.iconic_prize:before {
+  content: "\e94f";
+}
+.iconic_external_wallet:before {
+  content: "\e950";
+}
+.iconic_calendar:before {
+  content: "\e951";
+}
+.iconic_menu:before {
+  content: "\e952";
+}
+.iconic_arrow_right:before {
+  content: "\e953";
+}
+.iconic_arrow_down:before {
+  content: "\e954";
+}
+.iconic_security:before {
+  content: "\e955";
+}
+.iconic_trash1:before {
+  content: "\e956";
+}
+.iconic_search:before {
+  content: "\e957";
+}
+.iconic_theme:before {
+  content: "\e958";
+}
+.iconic_qr_code:before {
+  content: "\e959";
+}
+.iconic_key:before {
+  content: "\e95a";
+}
+.iconic_upload:before {
+  content: "\e95b";
+}
+.iconic_eye_off:before {
+  content: "\e95d";
+}
+.iconic_subtraction:before {
+  content: "\e95e";
+}
+.iconic_plus:before {
+  content: "\e95f";
+}
+.iconic_eye_on:before {
+  content: "\e960";
+}
+.iconic_phone-call:before {
+  content: "\e961";
+}
+.iconic_back:before {
+  content: "\e962";
+}
+.iconic_close:before {
+  content: "\e963";
+}
+.iconic_edit:before {
+  content: "\e964";
+}
+.iconic_howtoplay:before {
+  content: "\e965";
+}
+.iconic_statistic:before {
+  content: "\e966";
+}
+.iconic_order:before {
+  content: "\e967";
+}
+.iconic_warning:before {
+  content: "\e968";
+}
+.iconic_deposit:before {
+  content: "\e969";
+}
+.iconic_dot:before {
+  content: "\e96a";
+}
+.iconic_referral:before {
+  content: "\e96b";
+}
+.iconic_email-address:before {
+  content: "\e96c";
+}
+.iconic_copy:before {
+  content: "\e96d";
+}
+.iconic_support:before {
+  content: "\e96e";
+}
+.iconic_tick:before {
+  content: "\e96f";
+}
+.iconic_information:before {
+  content: "\e970";
+}
+.iconic_animation:before {
+  content: "\e94e";
+}
+.iconic_tick-circle:before {
+  content: "\e94d";
+}
+.iconic_sound-off:before {
+  content: "\e945";
+}
+.iconic_gamehistory:before {
+  content: "\e94b";
+}
+.iconic_shield-lock:before {
+  content: "\e94c";
+}
+.iconic_shield-question:before {
+  content: "\e922";
+}
+.iconic_shield-tick:before {
+  content: "\e948";
+}
+.iconic_shield-user:before {
+  content: "\e912";
+}
+.iconic_clock:before {
+  content: "\e941";
+}
+.iconic_rule:before {
+  content: "\e942";
+}
+.iconic_rank:before {
+  content: "\e943";
+}
+.iconic_infinity:before {
+  content: "\e93c";
+}
+.iconic_sound-on:before {
+  content: "\e93d";
+}
+.iconic_arrow_left:before {
+  content: "\e938";
+}
+.iconic_wallet:before {
+  content: "\e904";
+}
+.iconic_withdraw:before {
+  content: "\e906";
+}
+.iconic_star-solid:before {
+  content: "\e90f";
+}
+.iconic_profile:before {
+  content: "\e917";
+}
+.iconic_error:before {
+  content: "\e924";
+}
+.iconic_backspace:before {
+  content: "\e930";
+}

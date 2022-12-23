@@ -1,0 +1,43 @@
+variables:
+    GCP_PROJECT_ID: athena-ilt
+    GCP_REGISTRY_HOST: asia.gcr.io/$GCP_PROJECT_ID
+    DOCKER_DRIVER: overlay2
+
+before_script:
+    - |
+        cat << EOF > .npmrc
+          update-notifier=false
+          strict-peer-dependencies=false
+          @athena20:registry=https://gitlab.com/api/v4/projects/38066698/packages/npm/
+          //gitlab.com/api/v4/projects/38066698/packages/npm/:_authToken=$NPM_TOKEN
+          @lottery:registry=https://gitlab.com/api/v4/projects/38066698/packages/npm/
+          //gitlab.com/api/v4/projects/38066698/packages/npm/:_authToken=$NPM_TOKEN
+        EOF
+
+workflow:
+    rules:
+        - if: $CI_COMMIT_MESSAGE =~ /^ci/
+          when: never
+        - if: $CI_COMMIT_BRANCH =~ /^dev/ && $CI_COMMIT_TAG !~ /^v/
+          variables:
+              DEPLOY_ENVIRONMENT: 'dev'
+        - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^dev/
+          variables:
+              DEPLOY_ENVIRONMENT: 'dev'
+        - if: $CI_COMMIT_BRANCH =~ /^(R|r)elease/
+          variables:
+              DEPLOY_ENVIRONMENT: 'stg'
+        - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(R|r)elease/
+          variables:
+              DEPLOY_ENVIRONMENT: 'stg'
+        - if: $CI_COMMIT_TAG =~ /^v([0-9]+)\.([0-9]+)\.([0-9]+)$/
+          variables:
+              DEPLOY_ENVIRONMENT: 'prd'
+              CI_COMMIT_SHORT_SHA: $CI_COMMIT_TAG
+        - if: $CI_COMMIT_BRANCH =~ /^main$/ && $CI_COMMIT_TAG !~ /^v/
+          variables:
+              DEPLOY_ENVIRONMENT: 'prd'
+
+include:
+    - local: .gitlab/base.gitlab-ci.yml
+    - local: .gitlab/website.gitlab-ci.yml

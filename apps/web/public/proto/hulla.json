@@ -1,0 +1,274 @@
+{
+  "nested": {
+    "ws": {
+      "nested": {
+        "Msg": {
+          "fields": {
+            "type": { "type": "uint64", "id": 1 },
+            "id": { "type": "string", "id": 2 },
+            "data": { "type": "bytes", "id": 3 },
+            "success": { "type": "bool", "id": 4 },
+            "errorCode": { "type": "uint64", "id": 5 },
+            "errorMessage": { "type": "string", "id": 6 }
+          }
+        },
+        "MsgType": {
+          "values": {
+            "PING": 0,
+            "PONG": 1,
+            "WRONG_FORMAT": 99999999,
+            "JOIN_GAME_CHANNEL_REQ": 100000,
+            "JOIN_GAME_CHANNEL_RESP": 100001,
+            "LEAVE_GAME_CHANNEL_REQ": 100002,
+            "LEAVE_GAME_CHANNEL_RESP": 100003,
+            "DICE_CREATE_NEW_TURN_REQ": 110004,
+            "DICE_CREATE_NEW_TURN_RESP": 110005,
+            "DICE_PLACE_BET_REQ": 110006,
+            "DICE_PLACE_BET_RESP": 110007,
+            "DICE_GET_LAST_RESULTS_REQ": 110008,
+            "DICE_GET_LAST_RESULTS_RESP": 110009,
+            "DICE_GET_BET_INFO_REQ": 110010,
+            "DICE_GET_BET_INFO_RESP": 110011,
+            "BET_RESULT": 990004
+          }
+        },
+        "CurrencySymbol": { "values": { "C_SYMBOL_NONE": 0, "TRX": 1 } },
+        "Ping": { "fields": {} },
+        "Pong": { "fields": {} },
+        "CommitHashInfo": {
+          "fields": {
+            "commitHash": { "type": "string", "id": 1 },
+            "signature": { "type": "string", "id": 2 }
+          }
+        },
+        "CrashStatus": {
+          "values": {
+            "CS_NONE": 0,
+            "STARTING": 1,
+            "STARTED": 2,
+            "TICKING": 3,
+            "ENDED": 4
+          }
+        },
+        "CrashStatusTicker": {
+          "fields": {
+            "gameStatus": { "type": "CrashStatus", "id": 1 },
+            "crashPoint": { "type": "string", "id": 2 },
+            "elapsedInMs": { "type": "uint32", "id": 3 },
+            "flyingPoint": { "type": "string", "id": 4 },
+            "roundId": { "type": "string", "id": 5 },
+            "commitHashInfo": { "type": "CommitHashInfo", "id": 6 },
+            "nextRoundCommitHashInfo": { "type": "CommitHashInfo", "id": 7 },
+            "originalHash": { "type": "string", "id": 8 },
+            "scheduledAt": { "type": "uint64", "id": 9 }
+          }
+        },
+        "Balance": {
+          "fields": {
+            "symbol": { "type": "string", "id": 1 },
+            "balance": { "type": "string", "id": 2 },
+            "availableBalance": { "type": "string", "id": 3 },
+            "balanceChangeType": { "type": "BalanceChangeType", "id": 4 },
+            "gameSymbol": { "type": "GameSymbol", "id": 5 },
+            "timestamp": { "type": "string", "id": 6 },
+            "totalLocked": { "type": "string", "id": 7 },
+            "totalMined": { "type": "string", "id": 8 }
+          },
+          "nested": {
+            "BalanceChangeType": {
+              "values": {
+                "BCT_NONE": 0,
+                "BCT_GAME": 1,
+                "BCT_DEPOSIT": 2,
+                "BCT_WITHDRAW": 3,
+                "BCT_MINING": 4,
+                "BCT_STAKING": 5
+              }
+            }
+          }
+        },
+        "PlayingMode": {
+          "values": { "PM_NONE": 0, "SMART_CONTRACT": 1, "DIRECT_SERVER": 2 }
+        },
+        "BetSection": {
+          "values": {
+            "BS_NONE": 0,
+            "MY_BET": 1,
+            "ALL_BET": 2,
+            "HIGH_ROLLER": 3,
+            "RARE_WIN": 4
+          }
+        },
+        "GameMode": { "values": { "GM_NONE": 0, "INSTANT": 1, "MULTIPLY": 2 } },
+        "GameSymbol": { "values": { "GS_NONE": 0, "DICE": 1 } },
+        "JoinGameChannelReq": {
+          "fields": {
+            "gameSymbol": { "type": "GameSymbol", "id": 1 },
+            "playingMode": { "type": "PlayingMode", "id": 2 }
+          }
+        },
+        "JoinGameChannelResp": {
+          "fields": {
+            "gameSymbol": { "type": "GameSymbol", "id": 1 },
+            "crashStatusTicker": { "type": "CrashStatusTicker", "id": 2 }
+          }
+        },
+        "LeaveGameChannelReq": {
+          "fields": { "gameSymbol": { "type": "GameSymbol", "id": 1 } }
+        },
+        "LeaveGameChannelResp": {
+          "fields": { "gameSymbol": { "type": "GameSymbol", "id": 1 } }
+        },
+        "GetBetResultsReq": {
+          "fields": {
+            "gameSymbol": { "type": "GameSymbol", "id": 1 },
+            "size": { "type": "uint32", "id": 2 },
+            "betSection": { "type": "BetSection", "id": 3 }
+          }
+        },
+        "BetResult": {
+          "fields": {
+            "gameSymbol": { "type": "GameSymbol", "id": 1 },
+            "betAmount": { "type": "string", "id": 2 },
+            "multiplier": { "type": "string", "id": 3 },
+            "payOut": { "type": "string", "id": 4 },
+            "win": { "type": "bool", "id": 5 },
+            "createdAt": { "type": "string", "id": 6 },
+            "playerInfo": { "type": "PlayerInfo", "id": 7 },
+            "isHighRoller": { "type": "bool", "id": 8 },
+            "isRareWin": { "type": "bool", "id": 9 },
+            "turnId": { "type": "string", "id": 10 },
+            "transactionId": { "type": "string", "id": 11 },
+            "symbol": { "type": "string", "id": 12 },
+            "playingMode": { "type": "PlayingMode", "id": 13 }
+          }
+        },
+        "GetBetResultsResp": {
+          "fields": {
+            "results": { "rule": "repeated", "type": "BetResult", "id": 1 }
+          }
+        },
+        "DiceDirection": {
+          "values": { "DD_NONE": 0, "ROLL_UNDER": 1, "ROLL_OVER": 2 }
+        },
+        "DiceCreateNewTurnReq": { "fields": {} },
+        "DiceCreateNewTurnResp": {
+          "fields": {
+            "turnId": { "type": "string", "id": 1 },
+            "commitHashInfo": { "type": "CommitHashInfo", "id": 2 }
+          }
+        },
+        "DicePlaceBetReq": {
+          "fields": {
+            "turnId": { "type": "string", "id": 1 },
+            "number": { "type": "uint32", "id": 2 },
+            "direction": { "type": "DiceDirection", "id": 3 },
+            "betAmount": { "type": "string", "id": 4 },
+            "symbol": { "type": "CurrencySymbol", "id": 5 }
+          }
+        },
+        "DicePlaceBetResp": {
+          "fields": {
+            "turnId": { "type": "string", "id": 1 },
+            "isWin": { "type": "bool", "id": 2 },
+            "payout": { "type": "string", "id": 3 },
+            "balance": { "type": "Balance", "id": 4 },
+            "luckyNumber": { "type": "uint32", "id": 5 },
+            "originalHash": { "type": "string", "id": 6 }
+          }
+        },
+        "DiceGetLastResultsReq": {
+          "fields": { "size": { "type": "uint32", "id": 1 } }
+        },
+        "DiceShortResult": {
+          "fields": {
+            "luckyNumber": { "type": "uint32", "id": 1 },
+            "win": { "type": "bool", "id": 2 }
+          }
+        },
+        "DiceGetLastResultsResp": {
+          "fields": {
+            "results": {
+              "rule": "repeated",
+              "type": "DiceShortResult",
+              "id": 1
+            }
+          }
+        },
+        "DiceGetBetInfoReq": {
+          "fields": { "turnId": { "type": "string", "id": 1 } }
+        },
+        "DiceGetBetInfoResp": {
+          "fields": {
+            "turnId": { "type": "string", "id": 1 },
+            "commitHashInfo": { "type": "CommitHashInfo", "id": 2 },
+            "number": { "type": "uint32", "id": 3 },
+            "direction": { "type": "DiceDirection", "id": 4 },
+            "betAmount": { "type": "string", "id": 5 },
+            "symbol": { "type": "string", "id": 6 },
+            "isWin": { "type": "bool", "id": 7 },
+            "payout": { "type": "string", "id": 8 },
+            "luckyNumber": { "type": "uint32", "id": 9 },
+            "originalHash": { "type": "string", "id": 10 }
+          }
+        },
+        "WithdrawStatus": {
+          "values": { "WS_NONE": 0, "SUCCESSFUL": 1, "FAIL": 2 }
+        },
+        "Deposit": {
+          "fields": {
+            "transactionId": { "type": "string", "id": 1 },
+            "symbol": { "type": "string", "id": 2 },
+            "amount": { "type": "string", "id": 3 }
+          }
+        },
+        "Withdrawal": {
+          "fields": {
+            "transactionId": { "type": "string", "id": 1 },
+            "symbol": { "type": "string", "id": 2 },
+            "amount": { "type": "string", "id": 3 },
+            "status": { "type": "WithdrawStatus", "id": 4 }
+          }
+        },
+        "Jackpot": {
+          "fields": {
+            "gameId": { "type": "uint32", "id": 1 },
+            "isJackpotWin": { "type": "bool", "id": 2 },
+            "isWinStreak": { "type": "bool", "id": 3 },
+            "payoutAmount": { "type": "string", "id": 4 }
+          }
+        },
+        "BatchNotification": {
+          "fields": {
+            "balance": { "type": "Balance", "id": 1 },
+            "betResults": { "rule": "repeated", "type": "BetResult", "id": 2 },
+            "deposit": { "type": "Deposit", "id": 5 },
+            "withdrawal": { "type": "Withdrawal", "id": 6 },
+            "Jackpot": { "type": "Jackpot", "id": 7 }
+          }
+        },
+        "ForceLeaveGameNotification": {
+          "fields": {
+            "fromSessionId": { "type": "string", "id": 1 },
+            "gameId": { "type": "uint32", "id": 2 },
+            "playingMode": { "type": "PlayingMode", "id": 3 }
+          }
+        },
+        "TryJoinGameNotification": {
+          "fields": {
+            "gameId": { "type": "uint32", "id": 1 },
+            "playingMode": { "type": "PlayingMode", "id": 2 }
+          }
+        },
+        "PlayerInfo": {
+          "fields": {
+            "firstName": { "type": "string", "id": 1 },
+            "lastName": { "type": "string", "id": 2 },
+            "address": { "type": "string", "id": 3 },
+            "userId": { "type": "string", "id": 4 }
+          }
+        }
+      }
+    }
+  }
+}

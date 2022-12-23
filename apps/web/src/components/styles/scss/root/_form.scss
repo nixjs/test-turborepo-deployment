@@ -1,0 +1,68 @@
+.form {
+    &-input {
+        padding: 0;
+        color: var(--base-input-content-input-color, var(--base-white));
+        background-color: #0000;
+        border: none;
+        outline: none;
+        width: 100%;
+        height: var(--base-input-content-input-height);
+        font-weight: var(--base-input-content-input-weight);
+        font-size: calc(1rem * var(--base-input-content-input-size-multiplier));
+    }
+    &-content {
+        --base-input-background-color: var(--base-white);
+        --base-input-border-width: 2px;
+        --base-input-border-color: var(--base-black-normal);
+        --base-input-content-input-color: var(--base-black-darkest);
+        --base-input-content-input-size-multiplier: 1;
+        --base-input-content-input-height: 100%;
+        width: 100%;
+        background: var(--base-input-background-color, var(--base-background-contrast));
+        border-width: var(--base-input-border-width, 0.0625rem);
+        border-color: var(--base-input-border-color, var(--base-color-dark-1));
+        border-style: var(--base-input-border-style, solid);
+        border-radius: var(--base-input-radius, 0.5rem);
+        padding-top: var(--base-input-padding-y, 0);
+        padding-right: var(--base-input-padding-x, 0.5rem);
+        padding-bottom: var(--base-input-padding-y, 0);
+        padding-left: var(--base-input-padding-x, 0.5rem);
+        height: var(--base-input-height, 3rem);
+        user-select: none;
+        display: flex;
+        &:hover {
+            &:not(.form-content--disabled) {
+                --base-input-border-color: var(--base-black-darkest);
+                --base-input-content-input-color: var(--base-brand-third);
+            }
+        }
+        &--focused {
+            &:not(.form-content--disabled) {
+                --base-input-border-color: var(--base-functional-useful);
+                --base-input-content-input-color: var(--base-brand-third);
+                &:hover {
+                    --base-input-border-color: var(--base-functional-useful);
+                    --base-input-content-input-color: var(--base-brand-third);
+                }
+            }
+        }
+        &--error {
+            --base-input-border-color: var(--base-functional-stressful);
+            --base-input-content-input-color: var(--base-brand-third);
+            &:hover {
+                --base-input-border-color: var(--base-functional-stressful);
+                --base-input-content-input-color: var(--base-brand-third);
+            }
+        }
+        &--disabled {
+            cursor: default;
+            .form-input {
+                cursor: default;
+            }
+        }
+        &--suffix {
+            display: flex;
+            align-items: center;
+        }
+    }
+}

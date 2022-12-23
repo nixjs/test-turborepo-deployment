@@ -1,0 +1,40 @@
+export enum DELAY_PUBLISH_TYPE {
+    ALL = 1,
+    LATEST = 2
+}
+
+export enum TYPE_CONVENTION {
+    // {Service Id= 3 digits}{Suffix Long Numbers= 3 digits}
+    // https=//inspirelab.atlassian.net/wiki/spaces/ILTDEFI/pages/364838917/WebSocket+Msg+Type+Convention
+    COMMON = 1100,
+    DICE = 1000,
+    COINFLIP = 2000,
+    CRASH = 3000,
+    LIMBO = 4000,
+    KENO = 5000,
+    HILO = 6000,
+    MEGA645 = 7000,
+    '3DMAX' = 8000,
+    '4DMAX' = 9000,
+    '4D' = 10000,
+    '5D' = 11000,
+    '6D' = 12000
+}
+
+export enum COMMON_KEY {
+    GET_AUTH_STATUS = TYPE_CONVENTION.COMMON + 1,
+    JOIN_GAME_CHANNEL,
+    LEAVE_GAME_CHANNEL,
+    BALANCE_CHANGE_NOTIFICATION,
+    DEPOSIT_BALANCE_NOTIFICATION,
+    RESET_PLAY_GAME,
+    RESET_JOIN_GAME,
+    INIT_GAME_SUCCESS,
+    DEPOSIT_NOTIFICATION,
+    WITHDRAW_NOTIFICATION,
+    REJOIN_GAME,
+    TRY_JOIN_GAME_CHANNEL,
+    FORCE_LEAVE_GAME_NOTIFICATION,
+    TRY_JOIN_GAME_NOTIFICATION,
+    GET_JACKPOT_NOTIFICATION
+}

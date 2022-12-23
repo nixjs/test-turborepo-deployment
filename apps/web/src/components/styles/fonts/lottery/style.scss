@@ -1,0 +1,366 @@
+@import "variables";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?1yjttu');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?1yjttu#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?1yjttu') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?1yjttu') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?1yjttu##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.iconic_deposit1 {
+  &:before {
+    content: $iconic_deposit1; 
+  }
+}
+.iconic_withdrawal {
+  &:before {
+    content: $iconic_withdrawal; 
+  }
+}
+.iconic_languages .path1 {
+  &:before {
+    content: $iconic_languages-path1;  
+    color: rgb(78, 78, 78);
+  }
+}
+.iconic_languages .path2 {
+  &:before {
+    content: $iconic_languages-path2;  
+    margin-left: -1em;  
+    color: rgb(78, 78, 78);
+  }
+}
+.iconic_languages .path3 {
+  &:before {
+    content: $iconic_languages-path3;  
+    margin-left: -1em;  
+    color: rgb(255, 255, 255);
+  }
+}
+.iconic_languages .path4 {
+  &:before {
+    content: $iconic_languages-path4;  
+    margin-left: -1em;  
+    color: rgb(78, 78, 78);
+  }
+}
+.iconic_languages .path5 {
+  &:before {
+    content: $iconic_languages-path5;  
+    margin-left: -1em;  
+    color: rgb(78, 78, 78);
+  }
+}
+.iconic_languages .path6 {
+  &:before {
+    content: $iconic_languages-path6;  
+    margin-left: -1em;  
+    color: rgb(78, 78, 78);
+  }
+}
+.iconic_term {
+  &:before {
+    content: $iconic_term; 
+  }
+}
+.iconic_news {
+  &:before {
+    content: $iconic_news; 
+  }
+}
+.iconic_arrow_down_small {
+  &:before {
+    content: $iconic_arrow_down_small; 
+  }
+}
+.iconic_logout {
+  &:before {
+    content: $iconic_logout; 
+  }
+}
+.iconic_prize {
+  &:before {
+    content: $iconic_prize; 
+  }
+}
+.iconic_external_wallet {
+  &:before {
+    content: $iconic_external_wallet; 
+  }
+}
+.iconic_calendar {
+  &:before {
+    content: $iconic_calendar; 
+  }
+}
+.iconic_menu {
+  &:before {
+    content: $iconic_menu; 
+  }
+}
+.iconic_arrow_right {
+  &:before {
+    content: $iconic_arrow_right; 
+  }
+}
+.iconic_arrow_down {
+  &:before {
+    content: $iconic_arrow_down; 
+  }
+}
+.iconic_security {
+  &:before {
+    content: $iconic_security; 
+  }
+}
+.iconic_trash1 {
+  &:before {
+    content: $iconic_trash1; 
+  }
+}
+.iconic_search {
+  &:before {
+    content: $iconic_search; 
+  }
+}
+.iconic_theme {
+  &:before {
+    content: $iconic_theme; 
+  }
+}
+.iconic_qr_code {
+  &:before {
+    content: $iconic_qr_code; 
+  }
+}
+.iconic_key {
+  &:before {
+    content: $iconic_key; 
+  }
+}
+.iconic_upload {
+  &:before {
+    content: $iconic_upload; 
+  }
+}
+.iconic_eye_off {
+  &:before {
+    content: $iconic_eye_off; 
+  }
+}
+.iconic_subtraction {
+  &:before {
+    content: $iconic_subtraction; 
+  }
+}
+.iconic_plus {
+  &:before {
+    content: $iconic_plus; 
+  }
+}
+.iconic_eye_on {
+  &:before {
+    content: $iconic_eye_on; 
+  }
+}
+.iconic_phone-call {
+  &:before {
+    content: $iconic_phone-call; 
+  }
+}
+.iconic_back {
+  &:before {
+    content: $iconic_back; 
+  }
+}
+.iconic_close {
+  &:before {
+    content: $iconic_close; 
+  }
+}
+.iconic_edit {
+  &:before {
+    content: $iconic_edit; 
+  }
+}
+.iconic_howtoplay {
+  &:before {
+    content: $iconic_howtoplay; 
+  }
+}
+.iconic_statistic {
+  &:before {
+    content: $iconic_statistic; 
+  }
+}
+.iconic_order {
+  &:before {
+    content: $iconic_order; 
+  }
+}
+.iconic_warning {
+  &:before {
+    content: $iconic_warning; 
+  }
+}
+.iconic_deposit {
+  &:before {
+    content: $iconic_deposit; 
+  }
+}
+.iconic_dot {
+  &:before {
+    content: $iconic_dot; 
+  }
+}
+.iconic_referral {
+  &:before {
+    content: $iconic_referral; 
+  }
+}
+.iconic_email-address {
+  &:before {
+    content: $iconic_email-address; 
+  }
+}
+.iconic_copy {
+  &:before {
+    content: $iconic_copy; 
+  }
+}
+.iconic_support {
+  &:before {
+    content: $iconic_support; 
+  }
+}
+.iconic_tick {
+  &:before {
+    content: $iconic_tick; 
+  }
+}
+.iconic_information {
+  &:before {
+    content: $iconic_information; 
+  }
+}
+.iconic_animation {
+  &:before {
+    content: $iconic_animation; 
+  }
+}
+.iconic_tick-circle {
+  &:before {
+    content: $iconic_tick-circle; 
+  }
+}
+.iconic_sound-off {
+  &:before {
+    content: $iconic_sound-off; 
+  }
+}
+.iconic_gamehistory {
+  &:before {
+    content: $iconic_gamehistory; 
+  }
+}
+.iconic_shield-lock {
+  &:before {
+    content: $iconic_shield-lock; 
+  }
+}
+.iconic_shield-question {
+  &:before {
+    content: $iconic_shield-question; 
+  }
+}
+.iconic_shield-tick {
+  &:before {
+    content: $iconic_shield-tick; 
+  }
+}
+.iconic_shield-user {
+  &:before {
+    content: $iconic_shield-user; 
+  }
+}
+.iconic_clock {
+  &:before {
+    content: $iconic_clock; 
+  }
+}
+.iconic_rule {
+  &:before {
+    content: $iconic_rule; 
+  }
+}
+.iconic_rank {
+  &:before {
+    content: $iconic_rank; 
+  }
+}
+.iconic_infinity {
+  &:before {
+    content: $iconic_infinity; 
+  }
+}
+.iconic_sound-on {
+  &:before {
+    content: $iconic_sound-on; 
+  }
+}
+.iconic_arrow_left {
+  &:before {
+    content: $iconic_arrow_left; 
+  }
+}
+.iconic_wallet {
+  &:before {
+    content: $iconic_wallet; 
+  }
+}
+.iconic_withdraw {
+  &:before {
+    content: $iconic_withdraw; 
+  }
+}
+.iconic_star-solid {
+  &:before {
+    content: $iconic_star-solid; 
+  }
+}
+.iconic_profile {
+  &:before {
+    content: $iconic_profile; 
+  }
+}
+.iconic_error {
+  &:before {
+    content: $iconic_error; 
+  }
+}
+.iconic_backspace {
+  &:before {
+    content: $iconic_backspace; 
+  }
+}
+

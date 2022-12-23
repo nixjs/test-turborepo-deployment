@@ -1,0 +1,55 @@
+#!/bin/bash
+
+echo "⚙️  Setup repository"
+git remote set-url origin "https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+
+PACKAGES_JSON_CHANGED=$(git diff-tree --no-commit-id --name-only -r HEAD^..HEAD | grep package.json)
+PACKAGES_CHANGED=$(git diff-tree --no-commit-id --name-only -r HEAD^..HEAD | grep packages/ | cut -d '/' -f2 | sort| uniq)
+
+packages_x_changes() {
+  for pkg in $PACKAGES_CHANGED
+  do
+    if [[ $pkg == 'website' ]]
+    then
+      continue
+    fi
+    PACKAGE_CHANGED_WITHOUT_WEBSITE=true
+  done
+
+  if [[ -z $PACKAGE_CHANGED_WITHOUT_WEBSITE ]]; then
+    echo " => Only website package change. Skip for now"
+  else
+    echo "  🚀 Bump new version"
+    yarn new-version patch -y --no-private
+
+    for pkg in $PACKAGES_CHANGED
+    do
+      if [[ $pkg == 'website' ]]
+      then
+        continue
+      fi
+      package=@$pkg
+      echo "  🚀 Publish $package"
+      yarn workspace @${package} publish
+      echo ""
+    done
+  fi
+}
+  
+echo $PAKCAGE_JSON_CHANGED
+if [[ -z $PACKAGES_JSON_CHANGED ]]; then
+  echo ""
+  echo " ⚙️  package.json no changed. Skip yarn install!"
+else
+  echo " ⚙️  package.json has changed."
+  yarn --network-timeout 100000 --network-concurrency 1
+fi
+
+if [[ -z $PACKAGES_CHANGED ]]; then
+  echo ""
+  echo " ⚙️  No packages changed. Skip publish"
+else
+  echo " ⚙️  Have some packages has changed. Publishing..."
+  packages_x_changes
+fi
+

@@ -1,0 +1,189 @@
+syntax = "proto3";
+option optimize_for = SPEED;
+
+package ws;
+option go_package = "gitlab.com/athena20/backend/websocket-service/pkg/api/go/web-socket/ws;ws";
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+    MSG
+------------------------------------------------------------------------------------------------------------------------
+*/
+message Msg {
+  uint64 type           = 1;
+  string id             = 2;
+  bytes data            = 3;
+  bool success          = 4;
+  uint64 error_code     = 5;
+  string error_message  = 6;
+}
+
+enum MsgType {
+  PING = 0;
+  PONG = 1;
+  WRONG_FORMAT = 99999999;
+  // Please do not change the above enums
+
+  JOIN_GAME_CHANNEL_REQ       = 100000;
+  JOIN_GAME_CHANNEL_RESP      = 100001;
+  LEAVE_GAME_CHANNEL_REQ      = 100002;
+  LEAVE_GAME_CHANNEL_RESP     = 100003;
+
+  BET_RESULT                  = 990001;
+  BALANCE                     = 990002;
+  DEPOSIT_BALANCE             = 990003;
+}
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+    CURRENCY SYMBOL
+------------------------------------------------------------------------------------------------------------------------
+*/
+
+enum CurrencySymbol {
+  CS_NONE     = 0;
+  CS_TRX      = 1;
+  CS_BNB      = 2;
+  CS_ETH      = 3;
+  CS_USDT_TRX = 4;
+  CS_USDT_ETH = 5;
+  CS_USDT_BSC = 6;
+  CS_BUSD     = 7;
+}
+
+enum GameSymbol {
+  GS_NONE                      = 0;
+  GS_DICE                      = 1;
+  GS_COINFLIP                  = 2;
+  GS_CRASH                     = 3;
+  GS_LIMBO                     = 4;
+  GS_KENO                      = 5;
+  GS_MEGA645                   = 6;
+  GS_3DMAX                     = 7;
+  GS_4DMAX                     = 8;
+  GS_4D                        = 9;
+  GS_5D                        = 10;
+  GS_6D                        = 11;
+}
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+    PING
+------------------------------------------------------------------------------------------------------------------------
+*/
+message Ping {}
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+    PONG
+------------------------------------------------------------------------------------------------------------------------
+*/
+message Pong {}
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+    COMMIT HASH INFO
+------------------------------------------------------------------------------------------------------------------------
+*/
+message CommitHashInfo{
+  string commit_hash          = 1;
+  string signature            = 2;
+}
+
+
+message Balance {
+  enum BalanceChangeType {
+    BCT_NONE                    = 0;
+    BCT_GAME                    = 1;
+    BCT_DEPOSIT                 = 2;
+    BCT_WITHDRAW                = 3;
+    BCT_MINING                  = 4;
+    BCT_STAKING                 = 5;
+  }
+
+  string symbol                                       = 1;
+  string total                                        = 2;
+  string available                                    = 3;
+  BalanceChangeType balance_change_type               = 4;
+  GameSymbol game_symbol                              = 5;
+  uint64 timestamp                                    = 6;
+  string total_locked                                 = 7;
+  string total_mined                                  = 8;
+}
+
+enum PlayingMode {
+  PM_NONE                                  = 0;
+  PM_SMART_CONTRACT                        = 1;
+  PM_DIRECT_SERVER                         = 2;
+}
+
+enum BetSection {
+  BS_NONE                                 = 0;
+  BS_MY_BET                               = 1;
+  BS_ALL_BET                              = 2;
+  BS_HIGH_ROLLER                          = 3;
+  BS_RARE_WIN                             = 4;
+}
+
+enum GameMode {
+  GM_NONE                   = 0;
+  GM_INSTANT                = 1;
+  GM_MULTIPLY               = 2;
+}
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+   JOIN GAME CHANNEL API
+------------------------------------------------------------------------------------------------------------------------
+*/
+message JoinGameChannelReq {
+  GameSymbol game_symbol       = 1;
+  PlayingMode playing_mode     = 2;
+}
+
+message JoinGameChannelResp {
+  GameSymbol game_symbol                   = 1; // Added
+}
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+   LEAVE GAME CHANNEL API
+------------------------------------------------------------------------------------------------------------------------
+*/
+message LeaveGameChannelReq {
+  GameSymbol game_symbol       = 1;
+}
+
+message LeaveGameChannelResp {
+  GameSymbol game_symbol       = 1;
+}
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+   BET RESULT
+------------------------------------------------------------------------------------------------------------------------
+*/
+message BetResult {
+  GameSymbol game_symbol                = 1;
+  string bet_amount                     = 2;
+  string multiplier                     = 3;
+  string payout                         = 4;
+  bool is_win                           = 5;
+  uint64 created_at                     = 6;
+  string user_id                        = 7;
+  bool is_high_roller                   = 8;
+  bool is_rare_win                      = 9;
+  string turn_id                        = 10;
+  string transaction_id                 = 11;
+  string currency_symbol                = 12;
+  PlayingMode playing_mode              = 13;
+  string round_id                       = 14;
+  string profit                         = 15;
+  string display_name                   = 18;
+}
+
+message DepositBalance {
+  string transaction_id = 1;
+  string symbol = 2;
+  string amount = 3;
+}

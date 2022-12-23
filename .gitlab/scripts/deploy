@@ -1,0 +1,9 @@
+#!/bin/bash
+
+REGISTRY_HOST=asia.gcr.io/athena-366888/lottery
+VERSION=$1
+
+docker build --pull --rm -f packages/website/Dockerfile -t $REGISTRY_HOST:$VERSION ./ --no-cache
+
+docker push $REGISTRY_HOST:$VERSION
+

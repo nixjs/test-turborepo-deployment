@@ -1,0 +1,29 @@
+{
+    "name": "@lottery/config",
+    "version": "0.0.4",
+    "description": "Types",
+    "author": {
+        "url": "https://github.com/nixjs",
+        "name": "nghinv"
+    },
+    "license": "MIT",
+    "sideEffects": false,
+    "main": "./src/index.ts",
+    "types": "./src/index.ts",
+    "publishConfig": {
+        "access": "public"
+    },
+    "files": [
+        "lib",
+        "src"
+    ],
+    "scripts": {
+        "lint": "eslint 'src/**/*.{ts,tsx}'"
+    },
+    "devDependencies": {
+        "@types/node": "^18.11.9",
+        "tsconfig": "workspace:*",
+        "typescript": "^4.8.4"
+    },
+    "dependencies": {}
+}

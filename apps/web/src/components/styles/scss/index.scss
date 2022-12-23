@@ -1,0 +1,215 @@
+@import 'swiper.css';
+@import '../fonts/lottery/style.css';
+@import '../fonts/CircularStd/font.css';
+@import '../fonts/BaiJamjuree/font.css';
+@import '../fonts/Oswald/stylesheet.css';
+@import '../fonts/FiraSansCondensed/stylesheet.css';
+@import './root/opacity';
+@import './root/form';
+@import './root/scrollbar';
+
+:root {
+    --base-font-family: 'Fira Sans Condensed';
+
+    --base-brand-primary: #d30000;
+    --base-brand-second: #5000d3;
+    --base-brand-third: #291d41;
+
+    --base-primary-normal: #0061d3;
+    --base-primary-light: #0072f8;
+
+    --base-black: #202020;
+    --base-black-darkest: #4e4e4e;
+    --base-black-darker: #7b7b7b;
+    --base-black-normal: #b8b8b8;
+    --base-black-lighter: #e7e7e7;
+    --base-black-lightest: #f6f6f6;
+
+    --base-white: #ffffff;
+    --base-white-700: rgba(255, 255, 255, 0.7);
+    --base-white-500: rgba(255, 255, 255, 0.5);
+    --base-white-300: rgba(255, 255, 255, 0.3);
+    --base-white-200: rgba(255, 255, 255, 0.2);
+    --base-white-100: rgba(255, 255, 255, 0.1);
+
+    --base-ink: #4a537e;
+
+    --base-background-darkest: linear-gradient(90deg, #3f2f60 0%, #160e28 100%);
+    --base-background-dark: linear-gradient(90deg, #6746ac 0%, #2b145e 100%);
+    --base-background-light: linear-gradient(90deg, #935dd8 0%, #3e1c84 100%);
+
+    --base-functional-stressful: #ff3131;
+    --base-functional-positive: #73bd45;
+    --base-functional-careful: #ed6400;
+    --base-functional-useful: #0061d3;
+
+    --base-transparent: #0000;
+    --base-link-color: var(--base-functional-useful);
+}
+
+html {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+html,
+body {
+    --base-background-color: var(--base-white);
+    --base-font-color: var(--base-black-darkest);
+    --base-line-height: 1.42857143;
+    --base-font-size-base: 16px;
+    --checkbox-box-shadow: var(--base-black-darkest);
+    --checkbox-ticker: var(--base-color-light);
+    font: inherit;
+    font-weight: 400;
+    font-family: var(--base-font-family);
+
+    // &[data-theme="light"] {
+    //     --base-font-color: #35383d;
+    //     --base-font-color-2: #9ca3af;
+    //     --base-background-color: white;
+    //     --base-border-color: #eaeaea;
+    //     --checkbox-box-shadow: #35383d;
+    //     --checkbox-ticker: #35383d;
+    // }
+    // &[data-theme="dark"] {
+    //     --base-font-color: white;
+    //     --base-font-color-2: #9ca3af;
+    //     --base-background-color: #161b28;
+    //     --base-border-color: #282c34;
+    //     --checkbox-box-shadow: rgba(255, 255, 255, 0.4);
+    //     --checkbox-ticker: rgba(255, 255, 255, 0.4);
+    // }
+}
+
+.text-oswald {
+    font-family: 'Oswald';
+}
+
+.text-fira {
+    font-family: 'Fira Sans Condensed';
+}
+
+.text-roboto {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.base-brand-primary {
+    color: var(--base-brand-primary) !important;
+}
+.base-brand-second {
+    color: var(--base-brand-second) !important;
+}
+.base-brand-third {
+    color: var(--base-brand-third) !important;
+}
+
+.base-primary-normal {
+    color: var(--base-primary-normal) !important;
+}
+.base-primary-light {
+    color: var(--base-primary-light) !important;
+}
+
+.base-black {
+    color: var(--base-black) !important;
+}
+.base-black-darkest {
+    color: var(--base-black-darkest) !important;
+}
+.base-black-darker {
+    color: var(--base-black-darker) !important;
+}
+.base-black-normal {
+    color: var(--base-black-normal) !important;
+}
+.base-black-lighter {
+    color: var(--base-black-lighter) !important;
+}
+.base-black-lightest {
+    color: var(--base-black-lightest) !important;
+}
+
+.base-white {
+    color: var(--base-white) !important;
+}
+.base-white-700 {
+    color: var(--base-white-700) !important;
+}
+.base-white-500 {
+    color: var(--base-white-500) !important;
+}
+.base-white-300 {
+    color: var(--base-white-300) !important;
+}
+.base-white-200 {
+    color: var(--base-white-200) !important;
+}
+.base-white-100 {
+    color: var(--base-white-100) !important;
+}
+
+.base-ink {
+    color: var(--base-ink) !important;
+}
+
+.base-transparent {
+    color: var(--base-transparent) !important;
+}
+
+.base-functional-stressful {
+    color: var(--base-functional-stressful) !important;
+}
+.base-functional-positive {
+    color: var(--base-functional-positive) !important;
+}
+.base-functional-careful {
+    color: var(--base-functional-careful) !important;
+}
+.base-functional-useful {
+    color: var(--base-functional-useful) !important;
+}
+
+.base-button-action {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.reset-button {
+    border: none;
+    outline: 0;
+    box-shadow: none;
+}
+
+.data-text {
+    &:before {
+        content: attr(data-text);
+        display: block;
+        font-weight: bold;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+    }
+}
+
+.tgme_widget_login_button {
+    opacity: 0 !important;
+}
+
+.text-overflow-ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+@media (min-width: 1400px) {
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl,
+    .container-xxl {
+        max-width: 1140px;
+    }
+}
