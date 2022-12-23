@@ -14,8 +14,6 @@
         "lint": "next lint"
     },
     "dependencies": {
-        "@lottery/facebook-login": "^0.0.4",
-        "@lottery/telegram-login": "^0.0.4",
         "@lottery/types": "workspace:*",
         "@lottery/uikit": "workspace:*",
         "@lottery/utils": "workspace:*",
