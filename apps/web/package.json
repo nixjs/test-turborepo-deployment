@@ -7,7 +7,7 @@
         "dev": "cross-env APP_ENV=dev next dev",
         "qc": "cross-env APP_ENV=qc next dev",
         "prod": "cross-env APP_ENV=prod next dev",
-        "build-dev": "cross-env APP_ENV=dev NODE_OPTIONS=--max_old_space_size=4096 next build",
+        "build": "cross-env APP_ENV=dev NODE_OPTIONS=--max_old_space_size=4096 next build",
         "build-qc": "cross-env APP_ENV=qc NODE_OPTIONS=--max_old_space_size=4096 next build",
         "build-prod": "cross-env APP_ENV=prod NODE_OPTIONS=--max_old_space_size=4096 next build",
         "start": "next start",
